@@ -21,13 +21,15 @@ class UserManager(BaseUserManager):
         if extra_fields.get('is_superuser') is not True:
             raise ValueError(('Superuser must have is_superuser=True.'))
         return self.create_user(email, password, **extra_fields)
+    
 class Patient(AbstractUser):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
-    email = models.EmailField(unique=True)
+    username = models.CharField(max_length=10)
+    email = models.EmailField(unique=True, null=True)
     
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["last_name"]
+    REQUIRED_FIELDS = ["password"]
     objects = UserManager()
     
     def __str__(self):
