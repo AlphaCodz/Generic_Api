@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from django.core.paginator import Paginator
 from .serializers import PatientSerializer
+from django.contrib.auth.hashers import make_password
 
 class CreatePatient(BaseView):
     required_post_fields = ["first_name", "last_name", "email", "password"]
@@ -28,11 +29,12 @@ class CreatePatient(BaseView):
             }
             return Response(res, 400)
         
-        patient = Patient(email=request.data["email"])
-        patient.first_name = request.data["first_name"]
-        patient.last_name = request.data.get("last_name")
-        patient.password = request.data["password"]
-        hased_data = make_password(patient.password)
+        patient = Patient.objects.create(
+            email = request.data.get("email"),
+            first_name = request.data["first_name"],
+            last_name = request.data.get("last_name"),
+            )
+        patient.password = make_password(request.data["password"])
         patient.save()
         res = {
             "code":201,
