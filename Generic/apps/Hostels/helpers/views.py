@@ -1,10 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.http import JsonResponse
 
 class BaseView(APIView):
     required_post_fields = set()
-    # required_get_fields  = set()
+    
     
     def post(self, request, format=None):
         for fields in self.required_post_fields:
@@ -15,5 +14,3 @@ class BaseView(APIView):
                 }
                 return Response(res,400)
         
-   
-           
