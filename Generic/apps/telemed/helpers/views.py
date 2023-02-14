@@ -9,7 +9,7 @@ class BaseView(APIView):
             if not request.data.get(fields):
                 res = {
                     "code":400,
-                    "message": f"{fields} is required"
+                    "error": f"{fields} is required"
                 }
                 return Response(res,400)
         
