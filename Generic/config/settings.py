@@ -33,6 +33,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    
+    # Api apps
+    "edumeet",
+    "Hostels",
+    "telemed",
 ]
 
 MIDDLEWARE = [
@@ -101,6 +106,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+# MODELS
+AUTH_USER_MODEL = "telemed.Patient"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
