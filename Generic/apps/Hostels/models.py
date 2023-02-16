@@ -14,7 +14,7 @@ class Login(models.Model):
         return self.full_name
     
 class Hostel(models.Model):
-    assigned_to = models.OneToOneField(Login, on_delete=models.PROTECT)
+    assigned_to = models.OneToOneField(Login, on_delete=models.PROTECT, null=True)
     name = models.CharField(max_length=100, null=True)
     description_image = models.ImageField(upload_to="media/")
     hostel_description = models.TextField()

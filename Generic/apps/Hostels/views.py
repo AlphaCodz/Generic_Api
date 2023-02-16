@@ -26,11 +26,21 @@ class LogUser(BaseView):
     
 def AssignHostel(request, id):
     user = get_object_or_404(Login, pk=id)
+    if Login.DoesNotExist:
+        res_data = {
+            "code":404,
+            "message": "Sorry you're not an Identified Student of YCT Please Login"
+        }
+        return Response(res_data, 404)
     hostel = Hostel(assigned_to=user)
+    hostel.occupied = True
     hostel.save()
+    
     res = {
-        "hostel":hostel
+        "code": 201,
+        "hostel": "Hostel Assigned SuccessFully"
     }
+    
     return Response({"message": "Successfully Assigned!"}, 201)
    
     # hostel_name = request.data["name"]
