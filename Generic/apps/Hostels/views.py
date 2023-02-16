@@ -29,7 +29,7 @@ class LogUser(BaseView):
 
 class AssignHostel(APIView):
     def post(self, request, id):
-        user = get_object_or_404(Login, pk=id)
+        user = get_object_or_404(Login, id=id)
         if not user:
             res_data = {
                 "code": 404,
