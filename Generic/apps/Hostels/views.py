@@ -25,32 +25,22 @@ class LogUser(BaseView):
         return Response(res_data, 201)
     
     
-def AssignHostel(request, id):
-    user = get_object_or_404(Login, pk=id)
-    if Login.DoesNotExist:
+
+class AssignHostel(APIView):
+    def post(self, request, id):
+        user = get_object_or_404(Login, pk=id)
+        if not user:
+            res_data = {
+                "code": 404,
+                "message": "Sorry, you're not an identified student of YCT. Please log in."
+            }
+            return Response(res_data, status=404)
+        hostel = Hostel(assigned_to=user)
+        hostel.occupied = True
+        hostel.save()
         res_data = {
-            "code":404,
-            "message": "Sorry you're not an Identified Student of YCT Please Login"
+            "message": "Successfully assigned!"
         }
-        return Response(res_data, 404)
-    hostel = Hostel(assigned_to=user)
-    hostel.occupied = True
-    hostel.save()
-    
-    res = {
-        "id":hostel.id,
-        "code": 201,
-        "hostel": "Hostel Assigned SuccessFully"
-    }
-    
-    return Response({"message": "Successfully Assigned!"}, 201)
-   
-    # hostel_name = request.data["name"]
-    # hostel = Hostel.objects.get(hostel_name)
-    # user = Hostel.objects.get(assigned_to__pk=id)
-    # if user.paid == True:
-    #     user.occupied == True
-    #     return Response({"message": "User Assigned to "})
-    # return False
+        return Response(res_data, status=201)
            
     
