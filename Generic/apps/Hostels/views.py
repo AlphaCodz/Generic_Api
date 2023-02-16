@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 # Create your views here.
 class LogUser(BaseView):
-    required_post_fields = ["full_name", "matric_no", "gender"]
+    required_post_fields = ["id", "full_name", "matric_no", "gender"]
     
     def post(self, request, format=None):
         super().post(request, format)
@@ -18,6 +18,7 @@ class LogUser(BaseView):
         )
         user.save()
         res_data = {
+            "id": user.id,
             "code": 201,
             "message": "Login Successful"
         }
@@ -37,6 +38,7 @@ def AssignHostel(request, id):
     hostel.save()
     
     res = {
+        "id":hostel.id,
         "code": 201,
         "hostel": "Hostel Assigned SuccessFully"
     }
