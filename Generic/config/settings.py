@@ -110,6 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5500",
     "https://yabatech-hostels.surge.sh",
+    "https://genericapi-production.up.railway.app",
 ]
 
 CORS_ALLOW_METHODS = [
