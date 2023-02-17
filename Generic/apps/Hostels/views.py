@@ -33,7 +33,6 @@ class LogUser(BaseView):
         }
         return Response(res_data, 201)
     
-    
 
 # class AssignHostel(APIView):
 def assign_hostel(self, request, pk):
