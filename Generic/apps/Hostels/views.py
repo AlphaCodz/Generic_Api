@@ -14,12 +14,12 @@ class LogUser(BaseView):
     def post(self, request, format=None):
         super().post(request, format)
         
-        data = request.data["matric_no"]
-        matric_no = Login.objects.get_or_create(matric_no=data)
+        # data = request.data["matric_no"]
+        # matric_no = Login.objects.get_or_create(matric_no=data)
         
         user = Login.objects.create(
             full_name = request.data["full_name"],
-            matric_no = matric_no,
+            matric_no= request.data.get("matric_no"),
             gender = request.data["gender"]
         )
         user.save()
