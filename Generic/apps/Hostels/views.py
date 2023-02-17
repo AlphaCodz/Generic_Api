@@ -14,12 +14,14 @@ class LogUser(BaseView):
     def post(self, request, format=None):
         super().post(request, format)
         
-        data = request.data["matric_no"]
-        matric_no = Login.objects.get_or_create(matric_no=data)
+        # data = request.data["matric_no"]
+        # if data:
+            
+        # matric_no = Login.objects.get_or_create(matric_no=data)
         
         user = Login.objects.create(
             full_name = request.data["full_name"],
-            matric_no= matric_no,
+            matric_no= request.data["matric_no"],
             gender = request.data["gender"]
         )
         user.save()
@@ -32,6 +34,10 @@ class LogUser(BaseView):
             "message": "Login Successful"
         }
         return Response(res_data, 201)
+    
+    # def login(self, request, format=None):
+    #     data = request.POST[""]
+    #     users = Login.objects.filter(matric_no=)
     
     
 
