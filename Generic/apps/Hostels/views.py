@@ -18,9 +18,9 @@ class LogUser(BaseView):
         matric_no = Login.objects.get_or_create(matric_no=data)
         
         user = Login.objects.create(
-            full_name = request.data.get("full_name"),
+            full_name = request.data["full_name"],
             matric_no = matric_no,
-            gender = request.data.get("gender")
+            gender = request.data["gender"]
         )
         user.save()
         res_data = {
@@ -32,6 +32,7 @@ class LogUser(BaseView):
             "message": "Login Successful"
         }
         return Response(res_data, 201)
+    
     
 
 # class AssignHostel(APIView):
